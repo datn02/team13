@@ -7,6 +7,7 @@
 #include <sensor_msgs/Imu.h>
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/Empty.h>
+#include <std_msgs/Float64.h>
 #include "common.hpp"
 
 double imu_ang_vel = -10, imu_lin_acc = 0; // unlikely to be spinning at -10 at the start
@@ -44,6 +45,7 @@ int main(int argc, char **argv)
 
     // Publisher
     ros::Publisher pub_pose = nh.advertise<geometry_msgs::PoseStamped>("pose", 1, true);
+    ros::Publisher motion_filter_vel_pub = nh.advertise<std_msgs::Float64>("motion_filter_lin_vel", 1, true);
 
     // Prepare published message
     geometry_msgs::PoseStamped pose_rbt;
@@ -53,7 +55,7 @@ int main(int argc, char **argv)
     { // subscribes to odom topic --> is the exact simulated position in gazebo; when used in real life, is derived from wheel encoders (no imu).
         // Subscriber
         ros::Subscriber sub_odom = nh.subscribe("odom", 1, &cbOdom);
-
+    
         // initialise rate
         ros::Rate rate(25);
 
@@ -201,6 +203,10 @@ int main(int argc, char **argv)
             
             filtered_velocity = odom_velocity * weight_odom_v + imu_velocity * weight_imu_v;
             filtered_angular_rate = odom_angular_rate * weight_odom_w + imu_ang_vel * weight_imu_w;
+
+            std_msgs::Float64 vel_msg;
+            vel_msg.data = filtered_velocity;
+            motion_filter_vel_pub.publish(vel_msg);
             
             // robot pose calculation
             

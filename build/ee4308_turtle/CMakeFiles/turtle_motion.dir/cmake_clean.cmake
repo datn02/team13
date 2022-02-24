@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/ducanh/team13/devel/lib/ee4308_turtle/turtle_motion"
-  "/home/ducanh/team13/devel/lib/ee4308_turtle/turtle_motion.pdb"
+  "/home/praveen/team13/devel/lib/ee4308_turtle/turtle_motion"
+  "/home/praveen/team13/devel/lib/ee4308_turtle/turtle_motion.pdb"
   "CMakeFiles/turtle_motion.dir/src/common.cpp.o"
   "CMakeFiles/turtle_motion.dir/src/motion.cpp.o"
 )

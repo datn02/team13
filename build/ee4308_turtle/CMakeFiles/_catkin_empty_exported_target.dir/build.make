@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ducanh/team13/src
+CMAKE_SOURCE_DIR = /home/praveen/team13/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ducanh/team13/build
+CMAKE_BINARY_DIR = /home/praveen/team13/build
 
 # Utility rule file for _catkin_empty_exported_target.
 
@@ -63,10 +63,10 @@ ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/build: _catkin_empty_
 .PHONY : ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/build
 
 ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/clean:
-	cd /home/ducanh/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
+	cd /home/praveen/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/_catkin_empty_exported_target.dir/cmake_clean.cmake
 .PHONY : ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/depend:
-	cd /home/ducanh/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ducanh/team13/src /home/ducanh/team13/src/ee4308_turtle /home/ducanh/team13/build /home/ducanh/team13/build/ee4308_turtle /home/ducanh/team13/build/ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/praveen/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/praveen/team13/src /home/praveen/team13/src/ee4308_turtle /home/praveen/team13/build /home/praveen/team13/build/ee4308_turtle /home/praveen/team13/build/ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ee4308_turtle/CMakeFiles/_catkin_empty_exported_target.dir/depend
 

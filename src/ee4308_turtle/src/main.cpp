@@ -11,6 +11,7 @@
 #include <nav_msgs/OccupancyGrid.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PointStamped.h>
+#include <std_msgs/Float64.h>
 
 std::vector<float> ranges;
 void cbScan(const sensor_msgs::LaserScan::ConstPtr &msg)
@@ -30,6 +31,11 @@ void cbPose(const geometry_msgs::PoseStamped::ConstPtr &msg)
     double siny_cosp = 2 * (q.w * q.z + q.x * q.y);
     double cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
     ang_rbt = atan2(siny_cosp, cosy_cosp);
+}
+
+double motion_filter_linear_vel;
+void cbMotionFilterVel(const std_msgs::Float64::ConstPtr &msg){
+    motion_filter_linear_vel = msg->data;
 }
 
 int main(int argc, char **argv)
@@ -113,6 +119,7 @@ int main(int argc, char **argv)
     // subscribers
     ros::Subscriber sub_scan = nh.subscribe("scan", 1, &cbScan);
     ros::Subscriber sub_pose = nh.subscribe("pose", 1, &cbPose);
+    ros::Subscriber motion_filter_vel_sub = nh.subscribe("motion_filter_lin_vel", 1, &cbMotionFilterVel);
 
     // Publishers
     ros::Publisher pub_path = nh.advertise<nav_msgs::Path>("path", 1, true);
@@ -243,7 +250,7 @@ int main(int argc, char **argv)
                         Position &turn_pt_next = post_process_path[m - 1];
                         Position &turn_pt_cur = post_process_path[m];
 
-                        std::vector<Position> traj = generate_trajectory(turn_pt_next, turn_pt_cur, average_speed, target_dt, grid);
+                        std::vector<Position> traj = generate_trajectory(turn_pt_next, turn_pt_cur, average_speed, target_dt, grid, motion_filter_linear_vel);
                         for (Position &pos_tgt : traj)
                         {
                             trajectory.push_back(pos_tgt);

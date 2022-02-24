@@ -40,27 +40,72 @@ std::vector<Position> post_process(std::vector<Position> path, Grid &grid) // re
     return post_process_path;
 }
 
-std::vector<Position> generate_trajectory(Position pos_begin, Position pos_end, double average_speed, double target_dt, Grid & grid)
+std::vector<Position> generate_trajectory(Position pos_begin, Position pos_end, double average_speed, double target_dt, Grid &grid, double initial_vel)
 {
+
     // (1) estimate total duration
     double Dx = pos_end.x - pos_begin.x;
     double Dy = pos_end.y - pos_begin.y;
-    double duration = sqrt(Dx*Dx + Dy*Dy) / average_speed;
+    double duration = sqrt(Dx * Dx + Dy * Dy) / average_speed;
+
+    // Position pos_before_end;
+    // double stop_x = 0.06;
+    // double stop_y = 0.08;
+    // pos_before_end.x = pos_end.x - stop_x;
+    // pos_before_end.y = pos_end.y - stop_y;
+    std::vector<Position> trajectory = {pos_begin};
+    // if (Dx > 0.2 || Dy > 0.2)
+    // {
+    //     // OR (2) generate targets for each target_dt
+    //     double Dx = pos_before_end.x - pos_begin.x;
+    //     double Dy = pos_before_end.y - pos_begin.y;
+
+    //     for (double time = target_dt; time < duration; time += target_dt)
+    //     {
+    //         trajectory.emplace_back(
+    //             pos_begin.x + Dx * time / duration,
+    //             pos_begin.y + Dy * time / duration);
+    //     }
+    // }
 
     // (2) generate cubic / quintic trajectory
     // done by students
 
-    // OR (2) generate targets for each target_dt
-    std::vector<Position> trajectory = {pos_begin};
+    // find velocities first
+
+    double s_ang = limit_angle(heading(pos_begin, pos_end));
+    double turn_vel = 0.06;
+    double initial_vel_x = initial_vel * cos(s_ang);
+    double initial_vel_y = initial_vel * sin(s_ang);
+    double final_vel_x = turn_vel * cos(s_ang);
+    double final_vel_y = turn_vel * sin(s_ang);
+    double acc_x = 0;
+    double acc_y = 0;
+    // Dx = pos_end.x - pos_before_end.x;
+    // Dy = pos_end.y - pos_before_end.y;
+    // duration = sqrt(Dx * Dx + Dy * Dy) / average_speed;
+
+    double a0 = pos_begin.x;
+    double a1 = initial_vel_x;
+    double a2 = 0.5 * acc_x;
+    double a3 = (-10 / pow(duration, 3) * pos_begin.x) - (6 / pow(duration, 2) * initial_vel_x) - (3 / 2 / duration * acc_x) + (10 / pow(duration, 3) * pos_end.x) - (4 / pow(duration, 2) * final_vel_x) + (1 / 2 / duration * acc_x);
+    double a4 = (15 / pow(duration, 4) * pos_begin.x) + (8 / pow(duration, 3) * initial_vel_x) + (3 / 2 / pow(duration, 2) * acc_x) + (-15 / pow(duration, 4) * pos_end.x) + (7 / pow(duration, 3) * final_vel_x) + (-1 / pow(duration, 2) * acc_x);
+    double a5 = (-6 / pow(duration, 5) * pos_begin.x) + (-3 / pow(duration, 4) * initial_vel_x) + (-1 / 2 / pow(duration, 3) * acc_x) + (6 / pow(duration, 5) * pos_end.x) + (-3 / pow(duration, 4) * final_vel_x) + (1 / 2 / pow(duration, 3) * acc_x);
+    
+    double b0 = pos_begin.y;
+    double b1 = initial_vel_y;
+    double b2 = 0.5 * acc_y;
+    double b3 = (-10 / pow(duration, 3) * pos_begin.y) - (6 / pow(duration, 2) * initial_vel_y) - (3 / 2 / duration * acc_y) + (10 / pow(duration, 3) * pos_end.y) - (4 / pow(duration, 2) * final_vel_y) + (1 / 2 / duration * acc_y);
+    double b4 = (15 / pow(duration, 4) * pos_begin.y) + (8 / pow(duration, 3) * initial_vel_y) + (3 / 2 / pow(duration, 2) * acc_y) + (-15 / pow(duration, 4) * pos_end.y) + (7 / pow(duration, 3) * final_vel_y) + (-1 / pow(duration, 2) * acc_y);
+    double b5 = (-6 / pow(duration, 5) * pos_begin.y) + (-3 / pow(duration, 4) * initial_vel_y) + (-1 / 2 / pow(duration, 3) * acc_y) + (6 / pow(duration, 5) * pos_end.y) + (-3 / pow(duration, 4) * final_vel_y) + (1 / 2 / pow(duration, 3) * acc_y);
+
     for (double time = target_dt; time < duration; time += target_dt)
     {
         trajectory.emplace_back(
-            pos_begin.x + Dx*time / duration,
-            pos_begin.y + Dy*time / duration
-        );
+            a0 + a1 * time + a2 * pow(time, 2) + a3 * pow(time, 3) + a4 * pow(time, 4) + a5 * pow(time, 5),
+            b0 + b1 * time + b2 * pow(time, 2) + b3 * pow(time, 3) + b4 * pow(time, 4) + b5 * pow(time, 5));
     }
-
-    return trajectory; 
+    return trajectory;
 }
 
 bool is_safe_trajectory(std::vector<Position> trajectory, Grid & grid)

@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ducanh/team13/src/ee4308_turtle/src/common.cpp" "/home/ducanh/team13/build/ee4308_turtle/CMakeFiles/turtle_move.dir/src/common.cpp.o"
-  "/home/ducanh/team13/src/ee4308_turtle/src/move.cpp" "/home/ducanh/team13/build/ee4308_turtle/CMakeFiles/turtle_move.dir/src/move.cpp.o"
+  "/home/praveen/team13/src/ee4308_turtle/src/common.cpp" "/home/praveen/team13/build/ee4308_turtle/CMakeFiles/turtle_move.dir/src/common.cpp.o"
+  "/home/praveen/team13/src/ee4308_turtle/src/move.cpp" "/home/praveen/team13/build/ee4308_turtle/CMakeFiles/turtle_move.dir/src/move.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,7 +18,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/ducanh/team13/src/ee4308_turtle/include/ee4308_turtle"
+  "/home/praveen/team13/src/ee4308_turtle/include/ee4308_turtle"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
