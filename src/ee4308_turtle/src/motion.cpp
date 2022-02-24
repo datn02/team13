@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     if (!nh.param("verbose_motion", verbose, false))
         ROS_WARN(" TMOVE : Param verbose_motion not found, set to false");
 
-    // Publisher
+    // Publishers
     ros::Publisher pub_pose = nh.advertise<geometry_msgs::PoseStamped>("pose", 1, true);
     ros::Publisher motion_filter_vel_pub = nh.advertise<std_msgs::Float64>("motion_filter_lin_vel", 1, true);
 
