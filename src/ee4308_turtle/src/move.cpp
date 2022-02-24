@@ -55,17 +55,17 @@ double biDirectionalAngError(double ang_err, double *direction) {
         return ang_err;
     }
 
-    if (ang_err <= M_PI - 1e-5 && ang_err >= (M_PI / 2) + 1e-5) {
+    else if (ang_err <= M_PI - 1e-5 && ang_err >= (M_PI / 2) + 1e-5) {
         *direction = -1;
         return -1.0f * (M_PI - ang_err);
     }
 
-    if (ang_err < 0 - 1e-5 && ang_err > (-1.0f * M_PI / 2.0f) + 1e-5) {
+    else if (ang_err < 0 - 1e-5 && ang_err > (-1.0f * M_PI / 2.0f) + 1e-5) {
         *direction = 1;
         return ang_err;
     }
 
-    if (ang_err <= (-1.0f * M_PI / 2.0f) - 1e-5 && ang_err >= (-1.0f * M_PI) + 1e-5) {
+    else {
         *direction = -1;
         return  (ang_err - (-1.0f * M_PI));
     }
@@ -153,11 +153,13 @@ int main(int argc, char **argv)
     
     // variables for positional pid
     double pid_pos_p_term = 0;
+    double pid_pos_i_accum = 0;
     double pid_pos_i_term = 0;
     double pid_pos_d_term = 0;
     
     // variables for angular pid
     double pid_ang_p_term = 0;
+    double pid_ang_i_accum = 0;
     double pid_ang_i_term = 0;
     double pid_ang_d_term = 0;
     
@@ -208,12 +210,14 @@ int main(int argc, char **argv)
 
             // calculate positional pid terms
             pid_pos_p_term = Kp_lin * pos_err;
-            pid_pos_i_term += Ki_lin * pos_err;
+            pid_pos_i_accum += pos_err * dt;
+            pid_pos_i_term = Ki_lin * pid_pos_i_accum;
             pid_pos_d_term = Kd_lin * (pos_err - pos_err_prev);
             
             // calculate angular pid terms
             pid_ang_p_term = Kp_ang * ang_err;
-            pid_ang_i_term += Ki_ang * ang_err;
+            pid_ang_i_accum += ang_err * dt;
+            pid_ang_i_term = Ki_ang * pid_ang_i_accum;
             pid_ang_d_term = Kd_ang * (ang_err - ang_err_prev);
             
             // intermediate pid outputs
@@ -223,12 +227,12 @@ int main(int argc, char **argv)
             // positional pid saturation calculation
             acc_lin_est = (pid_pos_output - pid_pos_output_sat_prev) / dt;
             acc_lin_est_sat = sat(acc_lin_est, max_lin_acc);
-            pid_pos_output_sat = sat(pid_pos_output + (acc_lin_est_sat * dt), max_lin_vel);
+            pid_pos_output_sat = sat(pid_pos_output_sat_prev + (acc_lin_est_sat * dt), max_lin_vel);
             
             // angular pid saturation calculation
             acc_ang_est = (pid_ang_output - pid_ang_output_sat_prev) / dt;
             acc_ang_est_sat = sat(acc_ang_est, max_ang_acc);
-            pid_ang_output_sat = sat(pid_ang_output + (acc_ang_est_sat * dt), max_ang_vel);
+            pid_ang_output_sat = sat(pid_ang_output_sat_prev + (acc_ang_est_sat * dt), max_ang_vel);
             
             
             // set to cmd_lin anf cmd_ang variables

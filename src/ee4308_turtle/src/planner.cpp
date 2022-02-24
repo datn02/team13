@@ -346,7 +346,7 @@ std::vector<Index> Planner::getThetaStar(Index idx_start, Index idx_goal) {
 
                         // add to openlist
                         add_to_open(&neighbor_node);
-                        ROS_INFO("theta worked here");
+                        //ROS_INFO("theta worked here");
                     }
                 }
                 
