@@ -20,8 +20,8 @@ void cbImu(const sensor_msgs::Imu::ConstPtr &msg)
 double wheel_l = 10, wheel_r = 10; // init as 10 bcos both are unlikely to be exactly 10 (both can start at non-zero if u reset the sim). whole doubles can also be exactly compared
 void cbWheels(const sensor_msgs::JointState::ConstPtr &msg)
 {
-    wheel_l = msg->position[1]; // double check the topic. it is labelled there
-    wheel_r = msg->position[0]; // double check the topic. it is labelled there
+    wheel_l = msg->position[0]; // double check the topic. it is labelled there
+    wheel_r = msg->position[1]; // double check the topic. it is labelled there
 }
 
 nav_msgs::Odometry msg_odom;
@@ -155,8 +155,8 @@ int main(int argc, char **argv)
         double dt = 0;
         ////////////////// DECLARE VARIABLES HERE //////////////////
         
-        double wheel_l_previous = 0; 
-        double wheel_r_previous = 0; // The angle rotated by the wheel(s) in the previous loop
+        double wheel_l_previous = wheel_l; 
+        double wheel_r_previous = wheel_r; // The angle rotated by the wheel(s) in the previous loop
         
         double wheel_l_delta_angle;  // angle displacement of left wheel
         double wheel_r_delta_angle;  // angle displacement of right wheel
@@ -190,6 +190,8 @@ int main(int argc, char **argv)
             
             wheel_l_delta_angle = wheel_l - wheel_l_previous; // calculating wheel's angle displacement
             wheel_r_delta_angle = wheel_r - wheel_r_previous; // calculating wheel's angle displacement 
+            wheel_l_previous = wheel_l; // setting the current angle to previous
+            wheel_r_previous = wheel_r; // setting the current angle to previous
             
             
             odom_velocity = (wheel_radius / (2 * dt)) * (wheel_r_delta_angle + wheel_l_delta_angle);   // calculate velocity value from odom data
@@ -227,8 +229,6 @@ int main(int argc, char **argv)
             
              
             ang_rbt_previous = ang_rbt;
-            wheel_l_previous = wheel_l; // setting the current angle to previous
-            wheel_r_previous = wheel_r; // setting the current angle to previous
             
              
             // publish the pose
