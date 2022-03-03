@@ -161,6 +161,11 @@ int main(int argc, char **argv)
 
     // Other variables
     bool replan = true;
+    bool robot_invalid = false;
+    bool goal_invalid = false;
+    bool is_valid = true;
+    Position temp_goal = pos_rbt;
+
     std::vector<Position> path, post_process_path, trajectory;
     int g = -1;                  // goal num
     Position pos_goal = pos_rbt; // to trigger the reach goal
@@ -193,6 +198,7 @@ int main(int argc, char **argv)
         if (dist_euc(pos_rbt, pos_goal) < close_enough)
         { // reached the goal, get new goal
             replan = true;
+            ROS_ERROR("Goal reached");
             if (++g >= goals.size())
             {
                 ROS_INFO(" TMAIN : Last goal reached");
@@ -228,7 +234,19 @@ int main(int argc, char **argv)
                 ROS_INFO(" TMAIN : Request Path from [%.2f, %.2f] to Goal %d at [%.2f,%.2f]",
                          pos_rbt.x, pos_rbt.y, g, pos_goal.x, pos_goal.y);
                 // if the robot and goal are both on accessible cells of the grid
-                path = planner.get(pos_rbt, pos_goal); // original path
+                // path = planner.get(pos_rbt, pos_goal); // original path
+                if (!robot_invalid && !goal_invalid) path = planner.get(pos_rbt, pos_goal); // original path
+                else if (robot_invalid){
+                    ROS_ERROR("Generated a new path to empty space");
+                    temp_goal = planner.get_next_valid_pos(pos_rbt);
+                    path = planner.get(temp_goal, pos_goal);
+                    robot_invalid = false;
+                }
+                else {
+                    temp_goal = planner.get_next_valid_pos(pos_goal);
+                    path = planner.get(temp_goal, pos_goal);
+                    goal_invalid = false;
+                }
                 if (path.empty())
                 { // path cannot be found
                     ROS_WARN(" TMAIN : No path found between robot and goal");
@@ -297,10 +315,19 @@ int main(int argc, char **argv)
             }
             else
             { // robot lies on inaccessible cell, or if goal lies on inaccessible cell
+                // if (!grid.get_cell(pos_rbt))
+                //     ROS_WARN(" TMAIN : Robot lies on inaccessible area. No path can be found");
+                // if (!grid.get_cell(pos_goal))
+                //     ROS_WARN(" TMAIN : Goal lies on inaccessible area. No path can be found");
                 if (!grid.get_cell(pos_rbt))
+                {
                     ROS_WARN(" TMAIN : Robot lies on inaccessible area. No path can be found");
-                if (!grid.get_cell(pos_goal))
+                    robot_invalid = true;
+                }
+                if (!grid.get_cell(pos_goal)){
                     ROS_WARN(" TMAIN : Goal lies on inaccessible area. No path can be found");
+                    goal_invalid = true;
+                }
             }
         }
 

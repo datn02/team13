@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/praveen/team13/devel/lib/ee4308_bringup/tf2_turtle"
-  "/home/praveen/team13/devel/lib/ee4308_bringup/tf2_turtle.pdb"
+  "/home/ducanh/team13/devel/lib/ee4308_bringup/tf2_turtle"
+  "/home/ducanh/team13/devel/lib/ee4308_bringup/tf2_turtle.pdb"
   "CMakeFiles/tf2_turtle.dir/src/tf2_turtle.cpp.o"
 )
 

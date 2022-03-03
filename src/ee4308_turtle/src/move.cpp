@@ -7,6 +7,7 @@
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Empty.h>
 #include "common.hpp"
+#include <fstream>
 
 bool target_changed = false;
 Position target;
@@ -75,6 +76,8 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "turtle_move");
     ros::NodeHandle nh;
+    std::ofstream data_file;
+    data_file.open("/home/ducanh/team13/data.txt");
 
     // Get ROS Parameters
     bool enable_move;
@@ -251,6 +254,8 @@ int main(int argc, char **argv)
             pid_pos_output_sat_prev = pid_pos_output_sat;
             pid_ang_output_sat_prev = pid_ang_output_sat;
 
+
+            data_file << ros::Time::now().toSec() << "\t" << pos_err << "\t" << ang_err << std::endl;
             // verbose
             if (verbose)
             {
@@ -267,6 +272,7 @@ int main(int argc, char **argv)
     msg_cmd.linear.x = 0;
     msg_cmd.angular.z = 0;
     pub_cmd.publish(msg_cmd);
+    data_file.close();
 
     ROS_INFO(" TMOVE : ===== END =====");
     return 0;

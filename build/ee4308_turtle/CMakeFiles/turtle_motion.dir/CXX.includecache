@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/praveen/team13/src/ee4308_turtle/include/ee4308_turtle/common.hpp
+/home/ducanh/team13/src/ee4308_turtle/include/ee4308_turtle/common.hpp
 
-/home/praveen/team13/src/ee4308_turtle/src/motion.cpp
+/home/ducanh/team13/src/ee4308_turtle/src/motion.cpp
 ros/ros.h
 -
 stdio.h
@@ -30,7 +30,7 @@ std_msgs/Empty.h
 std_msgs/Float64.h
 -
 common.hpp
-/home/praveen/team13/src/ee4308_turtle/src/common.hpp
+/home/ducanh/team13/src/ee4308_turtle/src/common.hpp
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string

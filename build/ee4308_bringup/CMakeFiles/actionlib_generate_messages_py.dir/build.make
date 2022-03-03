@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/praveen/team13/src
+CMAKE_SOURCE_DIR = /home/ducanh/team13/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/praveen/team13/build
+CMAKE_BINARY_DIR = /home/ducanh/team13/build
 
 # Utility rule file for actionlib_generate_messages_py.
 
@@ -63,10 +63,10 @@ ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/build: actionlib_ge
 .PHONY : ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/build
 
 ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/clean:
-	cd /home/praveen/team13/build/ee4308_bringup && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/ducanh/team13/build/ee4308_bringup && $(CMAKE_COMMAND) -P CMakeFiles/actionlib_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/clean
 
 ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/depend:
-	cd /home/praveen/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/praveen/team13/src /home/praveen/team13/src/ee4308_bringup /home/praveen/team13/build /home/praveen/team13/build/ee4308_bringup /home/praveen/team13/build/ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ducanh/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ducanh/team13/src /home/ducanh/team13/src/ee4308_bringup /home/ducanh/team13/build /home/ducanh/team13/build/ee4308_bringup /home/ducanh/team13/build/ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ee4308_bringup/CMakeFiles/actionlib_generate_messages_py.dir/depend
 

@@ -385,3 +385,100 @@ std::vector<Index> Planner::getThetaStar(Index idx_start, Index idx_goal) {
     return path_idx; // is empty if open list is empty
 }
 
+
+Index Planner::get_next_valid_pos(Index idx_start)
+{
+    std::vector<Index> path_idx; // clear previous path
+
+    // initialise data for all nodes
+    for (Node & node : nodes)
+    {
+        node.h = 0;
+        node.g = 1e5; // a reasonably large number. You can use infinity in clims as well, but clims is not included
+        node.visited = false;
+    }
+
+    // set start node g cost as zero
+    int k = grid.get_key(idx_start);
+    ROS_INFO("idx_start %d %d", idx_start.i, idx_start.j);
+    Node * node = &(nodes[k]);
+    node->g = 0;
+
+    // add start node to openlist
+    add_to_open(node);
+
+    // main loop
+    while (!open_list.empty())
+    {
+        // (1) poll node from open
+        node = poll_from_open();
+
+        // (2) check if node was visited, and mark it as visited
+        if (node->visited)
+        {   // if node was already visited ==> cheapest route already found, no point expanding this anymore
+            continue; // go back to start of while loop, after checking if open list is empty
+        }
+        node->visited = true; // mark as visited, so the cheapest route to this node is found
+
+
+        // (3) return path if node is a free cell
+        if (grid.get_cell(node -> idx))
+        {   // reached the goal, return the path
+            ROS_INFO("Replan next starting position");
+
+            return node->idx;
+        }
+
+        // (4) check neighbors and add them if cheaper
+        bool is_cardinal = true;
+        for (int dir = 0; dir < 8; ++dir)
+        {   // for each neighbor in the 8 directions
+
+            // get their index
+            Index & idx_nb_relative = NB_LUT[dir];
+            Index idx_nb(
+                node->idx.i + idx_nb_relative.i,
+                node->idx.j + idx_nb_relative.j
+            );
+
+            // check if in map and accessible
+            if (!grid.get_cell(idx_nb))
+            {   // if not, move to next nb
+                continue;
+            }
+
+            // get the cost if accessing from node as parent
+            double g_nb = node->g;
+            if (is_cardinal) 
+                g_nb += 1;
+            else
+                g_nb += M_SQRT2;
+            // the above if else can be condensed using ternary statements: g_nb += is_cardinal ? 1 : M_SQRT2;
+
+            // compare the cost to any previous costs. If cheaper, mark the node as the parent
+            int nb_k = grid.get_key(idx_nb);
+            Node & nb_node = nodes[nb_k]; // use reference so changing nb_node changes nodes[k]
+            if (nb_node.g > g_nb + 1e-5)
+            {   // previous cost was more expensive, rewrite with current
+                nb_node.g = g_nb;
+                nb_node.parent = node->idx;
+
+                // add to open
+                add_to_open(&nb_node); // & a reference means getting the pointer (address) to the reference's object.
+            }
+
+            // toggle is_cardinal
+            is_cardinal = !is_cardinal;
+        }
+    }
+    // clear open list
+    open_list.clear();
+    return node->idx;
+}
+
+
+Position Planner::get_next_valid_pos(Position pos_start)
+{
+    Index path_idx = get_next_valid_pos(grid.pos2idx(pos_start));
+    return grid.idx2pos(path_idx);
+}
