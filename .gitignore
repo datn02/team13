@@ -1,4 +1,4 @@
-.vscode/
+.vscode/*
 .vscode/*.vc.db-shm
 .vscode/*.vc.db-wal
 .vscode/*.json
