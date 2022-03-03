@@ -3,3 +3,5 @@
 .vscode/*.vc.db-wal
 .vscode/*.json
 .vscode/*.json
+.vscode/browse.vc.db
+src/ee4308_turtle/.vscode/*
