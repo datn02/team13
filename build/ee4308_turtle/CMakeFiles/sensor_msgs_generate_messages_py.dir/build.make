@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ducanh/team13/src
+CMAKE_SOURCE_DIR = /home/nmnguyen/team13/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ducanh/team13/build
+CMAKE_BINARY_DIR = /home/nmnguyen/team13/build
 
 # Utility rule file for sensor_msgs_generate_messages_py.
 
@@ -63,10 +63,10 @@ ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/build: sensor_msgs
 .PHONY : ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 
 ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/clean:
-	cd /home/ducanh/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_py.dir/cmake_clean.cmake
+	cd /home/nmnguyen/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/sensor_msgs_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/clean
 
 ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend:
-	cd /home/ducanh/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ducanh/team13/src /home/ducanh/team13/src/ee4308_turtle /home/ducanh/team13/build /home/ducanh/team13/build/ee4308_turtle /home/ducanh/team13/build/ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/nmnguyen/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nmnguyen/team13/src /home/nmnguyen/team13/src/ee4308_turtle /home/nmnguyen/team13/build /home/nmnguyen/team13/build/ee4308_turtle /home/nmnguyen/team13/build/ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ee4308_turtle/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend
 

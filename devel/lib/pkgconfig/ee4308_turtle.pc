@@ -1,4 +1,4 @@
-prefix=/home/ducanh/team13/devel
+prefix=/home/nmnguyen/team13/devel
 
 Name: ee4308_turtle
 Description: Description of ee4308_turtle
