@@ -338,7 +338,7 @@ std::vector<Index> Planner::getThetaStar(Index idx_start, Index idx_goal) {
                 double dist_from_curr_node = dist_euc(node->idx, neighbor_node.idx) + node->g;
 
                 // if the distance from parent is smaller than distance to the current node (triangle shape)
-                if (dist_from_curr_node > dist_from_parent + 1e-5) {
+                if (dist_from_curr_node >= dist_from_parent) {
                     // update costs and parent of neighbor node                
                     if (neighbor_node.g > dist_from_parent + 1e-5) {
                         neighbor_node.g = dist_from_parent;
@@ -347,19 +347,6 @@ std::vector<Index> Planner::getThetaStar(Index idx_start, Index idx_goal) {
                         // add to openlist
                         add_to_open(&neighbor_node);
                         //ROS_INFO("theta worked here");
-                    }
-                }
-                
-                // if it is not (next node and current node's parent form a straight line with current node)
-                else {
-                    // update costs and parent of neighbor node
-                    if (neighbor_node.g > dist_from_curr_node + 1e-5) {
-                        neighbor_node.g = dist_from_curr_node;
-                        neighbor_node.parent = node->idx;
-
-                        // add to openlist 
-                        add_to_open(&neighbor_node);
-                        //ROS_INFO("theta worked heere2");
                     }
                 }
                 
@@ -441,18 +428,27 @@ Index Planner::get_next_valid_pos(Index idx_start)
                 node->idx.j + idx_nb_relative.j
             );
 
+            double g_nb = node->g;
             // check if in map and accessible
             if (!grid.get_cell(idx_nb))
             {   // if not, move to next nb
-                continue;
-            }
+                //continue;
+                int k = grid.get_key(idx_nb);
 
+                if (grid.grid_inflation[k] > 0)
+                    g_nb += 100;
+                else if (grid.grid_log_odds[k] > grid.log_odds_thresh)
+                    g_nb += 1000; ; // in map, not inflated, and log odds occupied
+
+            }
+            else {
             // get the cost if accessing from node as parent
-            double g_nb = node->g;
+            // double g_nb = node->g;
             if (is_cardinal) 
                 g_nb += 1;
             else
                 g_nb += M_SQRT2;
+            }
             // the above if else can be condensed using ternary statements: g_nb += is_cardinal ? 1 : M_SQRT2;
 
             // compare the cost to any previous costs. If cheaper, mark the node as the parent

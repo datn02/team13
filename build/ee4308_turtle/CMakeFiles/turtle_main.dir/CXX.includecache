@@ -52,7 +52,11 @@ common.hpp
 grid.hpp
 /home/nmnguyen/team13/src/ee4308_turtle/include/ee4308_turtle/grid.hpp
 
+<<<<<<< HEAD
+/home/ducanh/team13/src/ee4308_turtle/src/main.cpp
+=======
 /home/nmnguyen/team13/src/ee4308_turtle/src/main.cpp
+>>>>>>> 412e58efd5b925423b561018bcb39240af849397
 ros/ros.h
 -
 grid.hpp

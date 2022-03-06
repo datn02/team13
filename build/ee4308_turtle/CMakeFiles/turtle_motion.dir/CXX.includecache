@@ -8,6 +8,15 @@
 
 /home/nmnguyen/team13/src/ee4308_turtle/include/ee4308_turtle/common.hpp
 
+<<<<<<< HEAD
+/home/ducanh/team13/src/ee4308_turtle/src/common.cpp
+common.hpp
+/home/ducanh/team13/src/ee4308_turtle/src/common.hpp
+cmath
+-
+
+/home/ducanh/team13/src/ee4308_turtle/src/motion.cpp
+=======
 /home/nmnguyen/team13/src/ee4308_turtle/src/common.cpp
 common.hpp
 /home/nmnguyen/team13/src/ee4308_turtle/src/common.hpp
@@ -15,6 +24,7 @@ cmath
 -
 
 /home/nmnguyen/team13/src/ee4308_turtle/src/motion.cpp
+>>>>>>> 412e58efd5b925423b561018bcb39240af849397
 ros/ros.h
 -
 stdio.h

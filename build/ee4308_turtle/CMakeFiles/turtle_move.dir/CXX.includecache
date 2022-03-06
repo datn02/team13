@@ -8,6 +8,9 @@
 
 /home/nmnguyen/team13/src/ee4308_turtle/include/ee4308_turtle/common.hpp
 
+<<<<<<< HEAD
+/home/ducanh/team13/src/ee4308_turtle/src/move.cpp
+=======
 /home/nmnguyen/team13/src/ee4308_turtle/src/common.cpp
 common.hpp
 /home/nmnguyen/team13/src/ee4308_turtle/src/common.hpp
@@ -15,6 +18,7 @@ cmath
 -
 
 /home/nmnguyen/team13/src/ee4308_turtle/src/move.cpp
+>>>>>>> 412e58efd5b925423b561018bcb39240af849397
 ros/ros.h
 -
 stdio.h
@@ -32,7 +36,13 @@ geometry_msgs/Twist.h
 std_msgs/Empty.h
 -
 common.hpp
+<<<<<<< HEAD
+/home/ducanh/team13/src/ee4308_turtle/src/common.hpp
+string
+-
+=======
 /home/nmnguyen/team13/src/ee4308_turtle/src/common.hpp
+>>>>>>> 412e58efd5b925423b561018bcb39240af849397
 fstream
 -
 
