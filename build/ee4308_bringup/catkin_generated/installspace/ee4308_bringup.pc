@@ -1,4 +1,4 @@
-prefix=/home/nmnguyen/team13/install
+prefix=/home/ducanh/team13/install
 
 Name: ee4308_bringup
 Description: Description of ee4308_bringup

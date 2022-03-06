@@ -230,11 +230,7 @@ int main(int argc, char **argv)
 
         if (replan)
         {
-<<<<<<< HEAD
-            if (grid.get_cell(pos_rbt) && grid.get_cell(pos_goal) || (goal_invalid || robot_invalid))
-=======
             if ((grid.get_cell(pos_rbt) && grid.get_cell(pos_goal)) || (goal_invalid || robot_invalid))
->>>>>>> 412e58efd5b925423b561018bcb39240af849397
             {
                 ROS_INFO(" TMAIN : Request Path from [%.2f, %.2f] to Goal %d at [%.2f,%.2f]",
                          pos_rbt.x, pos_rbt.y, g, pos_goal.x, pos_goal.y);
@@ -244,19 +240,13 @@ int main(int argc, char **argv)
                 if (!robot_invalid && !goal_invalid){
                     path = planner.get(pos_rbt, pos_goal);
                 } // original path
-                else if (goal_invalid){
-                    ROS_ERROR("Generated a new PATH to New GOAL");
-                    pos_goal = planner.get_next_valid_pos(pos_goal);
-                    path = planner.get(pos_rbt, pos_goal);
-                    goal_invalid = false;
-                }
+                
                 else if (robot_invalid){
                     ROS_ERROR("Generated a new path to empty space");
                     temp_goal = planner.get_next_valid_pos(pos_rbt);
                     path = planner.get(temp_goal, pos_goal);
-<<<<<<< HEAD
-                    // if (dist_euc(pos_rbt, temp_goal) < close_enough/2) robot_invalid = false;
-                    robot_invalid = false;
+                    if (dist_euc(pos_rbt, temp_goal) < close_enough) robot_invalid = false;
+                    //robot_invalid = false;
                 }
                 else {
                     ROS_ERROR("Generate new PATH to new GOAL");
@@ -264,9 +254,6 @@ int main(int argc, char **argv)
                     // pos_goal = temp_goal;
                     path = planner.get(pos_rbt, temp_goal);
                     goal_invalid = false;
-=======
-                    if (dist_euc(pos_rbt, temp_goal) < close_enough) robot_invalid = false;
->>>>>>> 412e58efd5b925423b561018bcb39240af849397
                 }
                 
                 if (path.empty())

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nmnguyen/team13/src
+CMAKE_SOURCE_DIR = /home/ducanh/team13/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nmnguyen/team13/build
+CMAKE_BINARY_DIR = /home/ducanh/team13/build
 
 # Utility rule file for geometry_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build: geome
 .PHONY : ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 
 ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/nmnguyen/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/ducanh/team13/build/ee4308_turtle && $(CMAKE_COMMAND) -P CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
 
 ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/nmnguyen/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nmnguyen/team13/src /home/nmnguyen/team13/src/ee4308_turtle /home/nmnguyen/team13/build /home/nmnguyen/team13/build/ee4308_turtle /home/nmnguyen/team13/build/ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ducanh/team13/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ducanh/team13/src /home/ducanh/team13/src/ee4308_turtle /home/ducanh/team13/build /home/ducanh/team13/build/ee4308_turtle /home/ducanh/team13/build/ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ee4308_turtle/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend
 

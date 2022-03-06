@@ -1,2 +1,2 @@
 ee4308_bringup:ee4308_turtle
--DCATKIN_DEVEL_PREFIX=/home/nmnguyen/team13/devel -DCMAKE_INSTALL_PREFIX=/home/nmnguyen/team13/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/ducanh/team13/devel -DCMAKE_INSTALL_PREFIX=/home/ducanh/team13/install -G Unix Makefiles
