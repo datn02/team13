@@ -5,6 +5,7 @@
 .vscode/*.json
 .vscode/browse.vc.db
 src/ee4308_turtle/.vscode/*
+src/ee4308_turtle/src/.vscode/*.vc.db
 src/.vscode/*
 build/*
 devel/*
