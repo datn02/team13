@@ -52,20 +52,6 @@ common.hpp
 grid.hpp
 /home/ducanh/team13/src/ee4308_turtle/include/ee4308_turtle/grid.hpp
 
-/home/ducanh/team13/src/ee4308_turtle/src/common.cpp
-common.hpp
-/home/ducanh/team13/src/ee4308_turtle/src/common.hpp
-cmath
--
-
-/home/ducanh/team13/src/ee4308_turtle/src/grid.cpp
-grid.hpp
-/home/ducanh/team13/src/ee4308_turtle/src/grid.hpp
-
-/home/ducanh/team13/src/ee4308_turtle/src/los.cpp
-los.hpp
-/home/ducanh/team13/src/ee4308_turtle/src/los.hpp
-
 /home/ducanh/team13/src/ee4308_turtle/src/main.cpp
 ros/ros.h
 -
@@ -95,14 +81,6 @@ geometry_msgs/PointStamped.h
 -
 std_msgs/Float64.h
 -
-
-/home/ducanh/team13/src/ee4308_turtle/src/planner.cpp
-planner.hpp
-/home/ducanh/team13/src/ee4308_turtle/src/planner.hpp
-
-/home/ducanh/team13/src/ee4308_turtle/src/trajectory.cpp
-trajectory.hpp
-/home/ducanh/team13/src/ee4308_turtle/src/trajectory.hpp
 
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string

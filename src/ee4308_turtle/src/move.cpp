@@ -7,6 +7,7 @@
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Empty.h>
 #include "common.hpp"
+#include <string>
 #include <fstream>
 
 bool target_changed = false;
@@ -77,7 +78,8 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "turtle_move");
     ros::NodeHandle nh;
     std::ofstream data_file;
-    data_file.open("/home/ducanh/team13/data.txt");
+    
+    double begin = ros::Time::now().toSec();
 
     // Get ROS Parameters
     bool enable_move;
@@ -119,6 +121,10 @@ int main(int argc, char **argv)
     double move_iter_rate;
     if (!nh.param("move_iter_rate", move_iter_rate, 25.0))
         ROS_WARN(" TMOVE : Param move_iter_rate not found, set to 25");
+
+    std::string data_filename = "/home/ducanh/team13/";
+    data_filename = data_filename + std::to_string(Kp_lin) + "_" + std::to_string(Kd_lin) + "_" + std::to_string(Kp_ang) + "_" + std::to_string(Kd_ang) + ".txt"; 
+    data_file.open(data_filename);
 
     // Subscribers
     ros::Subscriber sub_target = nh.subscribe("target", 1, &cbTarget);
@@ -255,7 +261,7 @@ int main(int argc, char **argv)
             pid_ang_output_sat_prev = pid_ang_output_sat;
 
 
-            data_file << ros::Time::now().toSec() << "\t" << pos_err << "\t" << ang_err << std::endl;
+            data_file << ros::Time::now().toSec() - begin << "\t" << pos_err << "\t" << ang_err << std::endl;
             // verbose
             if (verbose)
             {
