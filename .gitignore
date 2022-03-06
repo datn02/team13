@@ -6,6 +6,7 @@
 .vscode/browse.vc.db
 src/ee4308_turtle/.vscode/*
 src/ee4308_turtle/src/.vscode/*.vc.db
+src/ee4308_turtle/src/.vscode/*
 src/.vscode/*
 build/*
 devel/*
