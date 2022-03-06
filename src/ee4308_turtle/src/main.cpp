@@ -236,6 +236,7 @@ int main(int argc, char **argv)
                          pos_rbt.x, pos_rbt.y, g, pos_goal.x, pos_goal.y);
                 // if the robot and goal are both on accessible cells of the grid
                 // path = planner.get(pos_rbt, pos_goal); // original path
+                
                 if (!robot_invalid && !goal_invalid){
                     path = planner.get(pos_rbt, pos_goal);
                 } // original path
