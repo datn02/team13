@@ -82,6 +82,10 @@ geometry_msgs/PointStamped.h
 std_msgs/Float64.h
 -
 
+/home/ducanh/team13/src/ee4308_turtle/src/trajectory.cpp
+trajectory.hpp
+/home/ducanh/team13/src/ee4308_turtle/src/trajectory.hpp
+
 /opt/ros/noetic/include/geometry_msgs/Point.h
 string
 -
